@@ -43,6 +43,9 @@ def cleaner(X):
     # Change these questions to binary with default value 0
     questions = ['Q' + str(i) for i in range(7,18)]
     X[questions] = X[questions].applymap(lambda x: 1 if x==1 else 0)
+
+    # Fill all null values with 0
+    X = X.fillna(0)
     return X
 
 
@@ -55,4 +58,4 @@ def get_country_codes():
     """
     variables = pd.read_excel('data/F00011221-WVS-7_Variables_Report_Annex.xlsx')
     country = variables[['Country/ territory', 'ISO 3166-1 numeric code']].set_index('ISO 3166-1 numeric code')
-    return country.to_dict()['Country/ territory']
+    return country #.to_dict()['Country/ territory']

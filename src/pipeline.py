@@ -1,19 +1,10 @@
 
 import pandas as pd 
+import numpy as np
 
-def pipeline(data):
-
-    data_cleaned = data.copy()
-
-
-    return data_cleaned
 
 def create_Xy(data):
     """ Create X and y variables for use by models. 
-
-    `PEP 484`_ type annotations are supported. If attribute, parameter, and
-    return types are annotated according to `PEP 484`_, they do not need to be
-    included in the docstring:
 
     Args:
         data (pd.DataFrame): Pandas dataframe with all data from source data file. 
@@ -38,7 +29,6 @@ def create_Xy(data):
     return X, y
 
 
-
 def cleaner(X):
     # Change these questions to binary with default value 0
     questions = ['Q' + str(i) for i in range(7,18)]
@@ -48,6 +38,40 @@ def cleaner(X):
     X = X.fillna(0)
     return X
 
+def get_top_5(X, model, names=True):
+    """ Get top 5 country codes predicted by model for given set X. 
+
+    Args:
+        X (pd.DataFrame): Pandas dataframe with set of data to predict. 
+        model (sklearn classifier): Trained sklearn model. 
+
+    Returns:
+        top5 (np.array): Array with top 5 countries as codes. 
+
+    """
+    countries = get_country_codes()
+    classes = model.classes_
+    probs = model.predict_proba(X)
+    top5 = probs.argsort()[:,-1:-6:-1]
+    top5 = [classes[top] for top in top5]
+    if names:
+        top5 = [countries[codes] for codes in top5]
+    return np.array(top5)
+
+def get_bottom_5(X, model):
+    probs = model.predict_proba(X)
+    bottom5 = probs.argsort()[:,:5]
+    return bottom5
+
+def get_top5_countries(top5, model):
+    classes = model.classes_
+    country = get_country_codes()
+    top5_countries = []
+    for top in top5:
+        codes = classes[top]
+        countries = [country[code] for code in codes]
+        top5_countries.append(countries)
+    return np.array(top5_countries)
 
 def get_country_codes():
     """ Get dictionary of country codes for xlsx file. 
@@ -57,5 +81,6 @@ def get_country_codes():
                     values - country names
     """
     variables = pd.read_excel('data/F00011221-WVS-7_Variables_Report_Annex.xlsx')
-    country = variables[['Country/ territory', 'ISO 3166-1 numeric code']].set_index('ISO 3166-1 numeric code')
+    country = variables['Country/ territory']
+    country.index = variables['ISO 3166-1 numeric code']
     return country #.to_dict()['Country/ territory']

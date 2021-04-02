@@ -1,4 +1,4 @@
-# Country Compatability
+# Country Compatability Predictor
 Predictive Modeling with World Values Survey data. 
 
 Differences in cultural values and beliefs can cause conflict between people. These conflicts can be as small as awkward moments and as large as multinational wars. The World Values Survey is an international research program devoted to the scientific study of social, political, economic, religious and cultural values of people in the word. Their main research is a survey conducted measuring beliefs and values throughout the world.

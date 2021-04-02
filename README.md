@@ -5,6 +5,8 @@ Differences in cultural values and beliefs can cause conflict between people. Th
 
 Using this data I hope to create statistical models to predict a person's country of residence. This model could be used as a tool for suggested compatability for travel, work, or living. 
 
+![](img/coverage-map.jpg)
+
 # Table of Contents
 1. [Data](#Data)
 2. [Modeling](#Modeling)
@@ -49,17 +51,17 @@ Because the nature of the survey allows for missing values, there was a signific
 The accuracy of a predictive model using default parameters of SKLearn's RandomForestClassifier gave an accuracy of 58.8%. A grid search of random forest models with performance scoring based on accuracy led to a model that gave 62.4% accuracy on holdout data. 
 
 Below are the feature importances for the random forest model. 
-![](img/rf-feature-importance.png)
+![](img/rf-feature-importances.png)
 These questions relate mostly to government. 
 
 ### Gradient Boosting
 SKLearn's GradientBoostingClassifier gave an accuracy of 67.1%. A grid search of random forest models with performance scoring based on accuracy led to a model that gave % accuracy on holdout data. 
 Below are feature importance for the gradient boosted model. 
-![](img/gb-feature-importance.png)
+![](img/gb-feature-importances.png)
 These questions are more related to social values. 
 
 ## Results
-Though this model is predicting the country that the surveyee lives in, its application is better served to show the countries that the person is similar to. The current best model has a 67.1% accuracy for predicting the specific country, but has a 91.1% chance that their resident country is in the top 5 of predicted countries. This model will show similarity to the residents of the country top predicted country and in a certain sense these shared values may indicicate a higher level of compatability. 
+Though this model is predicting the country that the surveyee lives in, its application is better served to show the countries that the person is similar to. The current best model has a 67.1% accuracy for predicting the specific country, but has a **91.1% chance that their resident country is in the top 5 of predicted countries**. This model will show similarity to the residents of the country top predicted country and in a certain sense these shared values may indicicate a higher level of compatability. 
 
 Example output for survey results:  
 Your 5 most compatible countries are: 

@@ -55,7 +55,7 @@ Below are the feature importances for the random forest model.
 These questions relate mostly to government. 
 
 ### Gradient Boosting
-SKLearn's GradientBoostingClassifier gave an accuracy of 67.1%. A grid search of random forest models with performance scoring based on accuracy led to a model that gave % accuracy on holdout data. 
+SKLearn's GradientBoostingClassifier gave an accuracy of 67.1%. 
 Below are feature importance for the gradient boosted model. 
 ![](img/gb-feature-importances.png)
 These questions are more related to social values. 

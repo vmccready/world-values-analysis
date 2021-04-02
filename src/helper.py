@@ -63,15 +63,12 @@ def get_bottom_5(X, model):
     bottom5 = probs.argsort()[:,:5]
     return bottom5
 
-def get_top5_countries(top5, model):
-    classes = model.classes_
-    country = get_country_codes()
-    top5_countries = []
-    for top in top5:
-        codes = classes[top]
-        countries = [country[code] for code in codes]
-        top5_countries.append(countries)
-    return np.array(top5_countries)
+def print_top_5(X, model):
+    top5 = get_top_5(X,model, names=True)[0]
+    output = 'Your 5 most compatible countries are: \n'
+    for i, country in enumerate(top5):
+        output += f'{i+1}. {country}\n'
+    print(output)
 
 def get_country_codes():
     """ Get dictionary of country codes for xlsx file. 
